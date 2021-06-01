@@ -44,12 +44,23 @@ func Tracing(n int) int8 {
 }
 
 func Trace(n int, format string, vals ...interface{}) {
-    fmt.Fprintf(trDest, format, vals...);
+    _, err := fmt.Fprintf(trDest, "%s ", traceNames[n])
+    if err != nil {
+        panic(err)
+    }
+    _, err = fmt.Fprintf(trDest, format, vals...);
+    if err != nil {
+        panic(err)
+    }
+    _, err = fmt.Fprintln(trDest);
+    if err != nil {
+        panic(err)
+    }
 }
 
 func TraceIf(n int, format string, vals ...interface{}){
     if tracePt[n] == 1 {
-        fmt.Fprintf(trDest, format, vals...);
+        Trace(n, format, vals...);
     }
 }
 

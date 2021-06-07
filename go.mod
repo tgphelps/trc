@@ -1,7 +1,7 @@
-module github.com/tgphelps/trc
+module tgphelps.com/trc
 
-require github.com/tgphelps/hdump v0.0.1
+// require tgphelps.com/hdump v0.0.1
 
-replace github.com/tgphelps/hdump v0.0.1 => ../hdump
+// replace tgphelps.com/hdump v0.0.1 => ../hdump
 
 go 1.16

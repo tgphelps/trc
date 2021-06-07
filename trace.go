@@ -3,8 +3,7 @@ package trc
 import (
 	"fmt"
 	"io"
-
-	"github.com/tgphelps/hdump"
+	// "tgphelps.com/hdump"
 )
 
 const numTracePoints = 16
@@ -65,13 +64,13 @@ func TraceIf(n int, format string, vals ...interface{}) {
 	}
 }
 
-func TraceDump(n int, buff []byte) {
-	if tracePt[n] == 1 {
-		// fmt.Fprintf(trDest, "dumping %d bytes\n", n)
-		dest := hdump.NewHdumper(trDest)
-		err := dest.DumpBytes(len(buff), buff)
-		if err != nil {
-			panic("error from hdump")
-		}
-	}
-}
+// func TraceDump(n int, buff []byte) {
+// if tracePt[n] == 1 {
+// // fmt.Fprintf(trDest, "dumping %d bytes\n", n)
+// dest := hdump.NewHdumper(trDest)
+// err := dest.DumpBytes(len(buff), buff)
+// if err != nil {
+// panic("error from hdump")
+// }
+// }
+// }

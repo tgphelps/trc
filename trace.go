@@ -8,7 +8,7 @@ import (
 
 const numTracePoints = 16
 
-var tracePt [numTracePoints]int8
+var tracePt [numTracePoints]bool
 
 var traceName [numTracePoints]string
 
@@ -18,7 +18,7 @@ var trDest io.Writer = io.Discard
 
 func TraceOpen(dest io.Writer) {
 	trDest = dest
-	tracePt[0] = 1
+	tracePt[0] = true
 	for i := 0; i < numTracePoints; i++ {
 		traceName[i] = fmt.Sprintf("TR%02d", i)
 		// fmt.Printf("%s\n", traceName[i]);
@@ -27,19 +27,19 @@ func TraceOpen(dest io.Writer) {
 
 func TraceClose() {
 	trDest = io.Discard
-	tracePt[0] = 0
+	tracePt[0] = false
 }
 
 func TraceOn(n int, name string) {
-	tracePt[n] = 1
+	tracePt[n] = true
 	traceName[n] = name
 }
 
 func TraceOff(n int) {
-	tracePt[n] = 0
+	tracePt[n] = false
 }
 
-func Tracing(n int) int8 {
+func Tracing(n int) bool {
 	return tracePt[n]
 }
 
@@ -59,7 +59,7 @@ func Trace(n int, format string, vals ...interface{}) {
 }
 
 func TraceIf(n int, format string, vals ...interface{}) {
-	if tracePt[n] == 1 {
+	if tracePt[n] {
 		Trace(n, format, vals...)
 	}
 }

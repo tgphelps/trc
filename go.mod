@@ -1,7 +1,5 @@
-module tgphelps.com/trc
+module github.com/tgphelps/trc
 
-// require tgphelps.com/hdump v0.0.1
+go 1.17
 
-// replace tgphelps.com/hdump v0.0.1 => ../hdump
-
-go 1.16
+require github.com/tgphelps/hdump v0.0.2

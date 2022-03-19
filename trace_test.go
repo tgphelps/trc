@@ -1,7 +1,7 @@
 package trc
 
 import (
-	"fmt"
+	// "fmt"
 	"os"
 	"strings"
 	"testing"
@@ -23,14 +23,14 @@ func TestExist(t *testing.T) {
 
 func Test1(t *testing.T) {
 	TraceOpen(&b)
-	TraceOn(0, "TEST1")
+	TraceOn(0, "TST1")
 	TraceIf(0, "hello world")
 	TraceIf(1, "error world")
 	TraceOff(0)
 	TraceIf(0, "error world")
 	TraceClose()
 	// fmt.Println(b.String());
-	if b.String() != "TEST1 hello world\n" {
+	if b.String() != "TST1  :hello world\n" {
 		t.Errorf("Test1: %s", b.String())
 	}
 }
@@ -51,12 +51,12 @@ func TestDump(t *testing.T) {
 	var b strings.Builder
 	buffer := []byte("abcdefgh")
 	TraceOpen(&b)
-	TraceOn(0, "DUMPER")
+	TraceOn(0, "DUMP")
 	TraceIf(0, "hex dump")
 	TraceDump(0, buffer[0:8])
 	TraceClose()
-	fmt.Println(b.String())
-	if b.String() != "DUMPER hex dump\n00000000 61 62 63 64 65 66 67 68                           abcdefgh\n" {
+	// fmt.Println(b.String())
+	if b.String() != "DUMP  :hex dump\n00000000 61 62 63 64 65 66 67 68                           abcdefgh\n" {
 		t.Errorf("TestDump: %s", b.String())
 	}
 }

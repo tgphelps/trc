@@ -3,6 +3,7 @@ package trc
 import (
 	"fmt"
 	"io"
+
 	"github.com/tgphelps/hdump"
 )
 
@@ -44,7 +45,7 @@ func Tracing(n int) bool {
 }
 
 func Trace(n int, format string, vals ...interface{}) {
-	_, err := fmt.Fprintf(trDest, "%-6s ", traceName[n])
+	_, err := fmt.Fprintf(trDest, "%-6s:", traceName[n])
 	if err != nil {
 		panic(err)
 	}
@@ -65,12 +66,12 @@ func TraceIf(n int, format string, vals ...interface{}) {
 }
 
 func TraceDump(n int, buff []byte) {
-    if tracePt[n] == true {
-        // fmt.Fprintf(trDest, "dumping %d bytes\n", n)
-        dest := hdump.NewHdumper(trDest)
-        err := dest.DumpBytes(len(buff), buff)
-        if err != nil {
-            panic("error from hdump")
-        }
-    }
+	if tracePt[n] == true {
+		// fmt.Fprintf(trDest, "dumping %d bytes\n", n)
+		dest := hdump.NewHdumper(trDest)
+		err := dest.DumpBytes(len(buff), buff)
+		if err != nil {
+			panic("error from hdump")
+		}
+	}
 }

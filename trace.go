@@ -69,9 +69,14 @@ func TraceDump(n int, buff []byte) {
 	if tracePt[n] == true {
 		// fmt.Fprintf(trDest, "dumping %d bytes\n", n)
 		dest := hdump.NewHdumper(trDest)
-		err := dest.DumpBytes(len(buff), buff)
-		if err != nil {
-			panic("error from hdump")
-		}
+		dest.DumpBytes(len(buff), buff)
+	}
+}
+
+func TraceInt32s(n int, buff []int32) {
+	if tracePt[n] == true {
+		// fmt.Fprintf(trDest, "dumping %d bytes\n", n)
+		dest := hdump.NewHdumper(trDest)
+		dest.DumpInt32s(len(buff), buff)
 	}
 }

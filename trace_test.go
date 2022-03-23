@@ -2,6 +2,7 @@ package trc
 
 import (
 	// "fmt"
+
 	"os"
 	"strings"
 	"testing"
@@ -57,6 +58,23 @@ func TestDump(t *testing.T) {
 	TraceClose()
 	// fmt.Println(b.String())
 	if b.String() != "DUMP  :hex dump\n00000000 61 62 63 64 65 66 67 68                           abcdefgh\n" {
+		t.Errorf("TestDump: %s", b.String())
+	}
+}
+
+func TestInts(t *testing.T) {
+	var results = "INTS  :hex dump\n" +
+		"00000000 00000001 00000002 00000003 00000004 00000005 00000006 00000007 00000008 \n" +
+		"00000008 000000ff 0000ffff 00ffffff ffffffff \n"
+	var b strings.Builder
+	buffer := []int32{1, 2, 3, 4, 5, 6, 7, 8, 255, 65535, (1 << 24) - 1, -1}
+	TraceOpen(&b)
+	TraceOn(0, "INTS")
+	TraceIf(0, "hex dump")
+	TraceInt32s(0, buffer[:])
+	TraceClose()
+	//fmt.Println(b.String())
+	if b.String() != results {
 		t.Errorf("TestDump: %s", b.String())
 	}
 }
